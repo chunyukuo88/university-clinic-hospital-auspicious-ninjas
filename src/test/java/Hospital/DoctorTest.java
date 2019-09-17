@@ -17,5 +17,12 @@ public class DoctorTest {
 		assertEquals(expectedSalary, 90_000);
 	}
 	
-	
+	@Test
+	public void canDrawBlood() {
+		Doctor testDoctor = new Doctor("Billy Joel", "Musical Therapy");
+		Patient testPatient = new Patient("George Washington");
+		int testPatientBloodLevel = testPatient.getBloodLevel();
+		testDoctor.drawBlood(testPatient);
+		assertEquals(testPatientBloodLevel, 16);
+	}	
 }

@@ -1,6 +1,6 @@
 package Hospital;
 
-public class Doctor extends Medical {
+public class Doctor extends Medical implements DrawBlood {
 
 	private String specialtyArea = "";
 	
@@ -16,6 +16,12 @@ public class Doctor extends Medical {
 
 	public void setSpecialtyArea(String specialtyArea) {
 		this.specialtyArea = specialtyArea;
+	}
+
+	//
+	public void drawBlood(Patient patient) {
+		int newBloodLevel = patient.getBloodLevel() - amountDrawnByDoc;
+		patient.setBloodLevel(newBloodLevel);
 	}
 	
 	
