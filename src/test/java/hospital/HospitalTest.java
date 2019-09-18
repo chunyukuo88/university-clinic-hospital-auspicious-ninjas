@@ -1,10 +1,17 @@
-package Hospital;
+package hospital;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
 import java.util.Collection;
 import org.junit.Test;
+
+import hospital.Doctor;
+import hospital.Employee;
+import hospital.Janitor;
+import hospital.Nurse;
+import hospital.Patient;
+import hospital.Receptionist;
 
 public class HospitalTest {
 
