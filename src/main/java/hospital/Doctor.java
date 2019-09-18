@@ -1,4 +1,4 @@
-package Hospital;
+package hospital;
 
 public class Doctor extends Medical implements DrawBlood {
 
@@ -8,7 +8,6 @@ public class Doctor extends Medical implements DrawBlood {
 		super(employeeName);
 		this.specialtyArea = specialtyArea;
 		setSalary(90_000);
-		
 	}
 
 	public String getSpecialtyArea() {

@@ -1,6 +1,6 @@
-package Hospital;
+package hospital;
 
-public class Nurse extends Medical {
+public class Nurse extends Medical implements DrawBlood {
 
 	private int numberOfPatients = 0;
 	
@@ -17,5 +17,11 @@ public class Nurse extends Medical {
 	public void setNumberOfPatients(int numberOfPatients) {
 		this.numberOfPatients = numberOfPatients;
 	}
+	
+	public void drawBlood(Patient patient) {
+		int newBloodLevel = patient.getBloodLevel() - amountDrawnByNurse;
+		patient.setBloodLevel(newBloodLevel);
+	}
+	
 
 }

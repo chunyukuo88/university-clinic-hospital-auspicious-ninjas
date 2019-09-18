@@ -1,8 +1,11 @@
-package Hospital;
+package hospital;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import hospital.Doctor;
+import hospital.Patient;
 
 public class DoctorTest {
 
@@ -21,8 +24,8 @@ public class DoctorTest {
 	public void canDrawBlood() {
 		Doctor testDoctor = new Doctor("Billy Joel", "Musical Therapy");
 		Patient testPatient = new Patient("George Washington");
-		int testPatientBloodLevel = testPatient.getBloodLevel();
 		testDoctor.drawBlood(testPatient);
+		int testPatientBloodLevel = testPatient.getBloodLevel();
 		assertEquals(testPatientBloodLevel, 16);
 	}	
 }
