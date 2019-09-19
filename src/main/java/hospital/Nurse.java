@@ -1,4 +1,4 @@
-package hospital;
+package Hospital;
 
 public class Nurse extends Medical implements DrawBlood {
 

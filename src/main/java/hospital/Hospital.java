@@ -1,10 +1,11 @@
-package hospital;
+package Hospital;
 
 import java.util.Collection;
 import java.util.HashMap;
 
 public class Hospital {
 
+	int zombiesInHospital = 10;
 	HashMap<String, Employee> employees;
 	HashMap<String, Patient> patients;
 

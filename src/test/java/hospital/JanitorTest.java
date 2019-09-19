@@ -1,10 +1,10 @@
-package hospital;
+package Hospital;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import hospital.Janitor;
+import Hospital.Janitor;
 
 public class JanitorTest {
 
@@ -24,7 +24,8 @@ public class JanitorTest {
 		Janitor underTest = new Janitor("Bjarne Stroustrup");
 		Hospital testHospital = new Hospital(); //Default 10 zombies.
 		underTest.fightZombies();
-		assertEquals(testHospital.zombieCount, 9);
+		int resultingZombieCount = testHospital.zombiesInHospital;
+		assertEquals(resultingZombieCount, 8);
 	}
 }
 

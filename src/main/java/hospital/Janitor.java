@@ -1,4 +1,4 @@
-package hospital;
+package Hospital;
 
 public class Janitor extends Employee {
 
@@ -15,6 +15,10 @@ public class Janitor extends Employee {
 
 	public void setSweeping(boolean isSweeping) {
 		this.isSweeping = isSweeping;
+	}
+
+	public void fightZombies() {
+		Hospital.zombiesInHospital -= 3;
 	}
 
 }

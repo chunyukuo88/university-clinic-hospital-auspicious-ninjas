@@ -1,10 +1,10 @@
-package hospital;
+package Hospital;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import hospital.Patient;
+import Hospital.Patient;
 
 public class PatientTest {
 
