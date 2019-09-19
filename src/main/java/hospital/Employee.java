@@ -1,4 +1,4 @@
-package Hospital;
+package hospital;
 
 public class Employee {
 
@@ -11,18 +11,18 @@ public class Employee {
 		setEmployeeName(employeeName);
 		setEmployeeNumber(1); // Update to set to a random number.
 		setSalary(0); // Change for each subclass...
-		setHasBeenPaid(false); // Default here, or should it be defaulted in the set method?
+		setHasBeenPaid(false);
 	}
 
 	public void paySalary() {
-		// Change to abstract method to be called by the Hospital class...
+		setHasBeenPaid(true);
 	};
 
 	public String getEmployeeName() {
 		return employeeName;
 	}
 
-	public void setEmployeeName(String employeeName) {
+	private void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
 
@@ -30,7 +30,7 @@ public class Employee {
 		return employeeNumber;
 	}
 
-	public void setEmployeeNumber(int employeeNumber) {
+	private void setEmployeeNumber(int employeeNumber) {
 		this.employeeNumber = employeeNumber;
 	}
 
@@ -38,7 +38,7 @@ public class Employee {
 		return salary;
 	}
 
-	public void setSalary(int salary) {
+	protected void setSalary(int salary) {
 		this.salary = salary;
 	}
 
@@ -46,8 +46,23 @@ public class Employee {
 		return hasBeenPaid;
 	}
 
-	public void setHasBeenPaid(boolean hasBeenPaid) {
+	private void setHasBeenPaid(boolean hasBeenPaid) {
 		this.hasBeenPaid = hasBeenPaid;
 	}
 
+	public String getEmployeeType() {
+		String employeeType = "";
+		if (this instanceof Doctor) {
+			employeeType = "Doctor";
+		} else if (this instanceof Nurse) {
+			employeeType = "Nurse";
+		} else if (this instanceof Receptionist) {
+			employeeType = "Receptionist";
+		} else if (this instanceof Janitor) {
+			employeeType = "Janitor";
+		} else {
+			employeeType = "Unknown";
+		}
+		return employeeType;
+	}
 }

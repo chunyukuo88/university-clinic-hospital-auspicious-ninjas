@@ -1,8 +1,10 @@
-package Hospital;
+package hospital;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import hospital.Receptionist;
 
 public class ReceptionistTest {
 
@@ -16,4 +18,6 @@ public class ReceptionistTest {
 		assertEquals(expectedSalary, 45_000);
 		assertEquals(expectedOnThePhone, true);
 	}
+	
+	
 }
