@@ -3,6 +3,8 @@ package hospital;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertArrayEquals;
+
 import java.util.Collection;
 import org.junit.Test;
 
