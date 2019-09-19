@@ -25,7 +25,9 @@ public class HospitalApp {
 		System.out.println("Please choose an option from the following menu:");
 		System.out.println("1. Add an employee to the hospital.     [EMP]");
 		System.out.println("2. Admit a new patient to the hospital. [PAT]");
-		System.out.println("3. Exit the application.                [END]");
+		System.out.println("3. View all hospital employees.         [EMV]");
+		System.out.println("4. View all admitted patients.          [PAV]");
+		System.out.println("5. Exit the application.                [END]");
 
 		userResponse = scanner.nextLine().trim().toUpperCase();
 		System.out.println();
@@ -36,6 +38,12 @@ public class HospitalApp {
 			break;
 		case "PAT":
 			addPatientToTheHospital();
+			break;
+		case "EMV":
+			displayEmployeeRecords();
+			break;
+		case "PAV":
+			displayPatientRecords();
 			break;
 		case "END":
 			terminateApplication();
@@ -97,7 +105,7 @@ public class HospitalApp {
 				System.out.println("Is " + receptionist.getEmployeeName() + " currently on the phone? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
 				System.out.println();
-				if (userResponse == "N") {
+				if (userResponse.equals("N")) {
 					receptionist.setOnThePhone(false);
 				}
 				break;
@@ -112,7 +120,7 @@ public class HospitalApp {
 				System.out.println("Is " + janitor.getEmployeeName() + " currently sweeping? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
 				System.out.println();
-				if (userResponse == "N") {
+				if (userResponse.equals("N")) {
 					janitor.setSweeping(false);
 				}
 				break;
@@ -144,9 +152,43 @@ public class HospitalApp {
 		System.out.println("Have a nice day!");
 		System.exit(0);
 	}
-	
 
 	private static void unknownUserResponse() {
 		System.out.println("Response not recognized.");
 	}
+
+	private static void displayEmployeeRecords() {
+		System.out.println("Employees:");
+		System.out.print(String.format("|%-15s", "Employee Number"));
+		System.out.print(String.format("|%-15s", "Employee Name"));
+		System.out.print(String.format("|%-15s", "Employee Type"));
+		System.out.print(String.format("|%-18s", "Medical Specialty"));
+		System.out.print(String.format("|%-15s", "Annual Salary"));
+		System.out.print(String.format("|%-7s", "Paid?"));
+		System.out.print(String.format("|%-9s|", "Working?"));
+		System.out.println();
+		System.out.println("|----------------------------------------------------------------------------------------------------|");	
+		String[] employeeRecords = hospital.retrieveEmployeeRecords();
+		for (String record : employeeRecords) {
+			System.out.println(record);
+		}
+		System.out.println();
+	}
+	
+	private static void displayPatientRecords() {
+		System.out.println("Patients:");
+		System.out.print(String.format("|%-15s", "Patient Number"));
+		System.out.print(String.format("|%-15s", "Patient Name"));
+		System.out.print(String.format("|%-15s", "Blood Level"));
+		System.out.print(String.format("|%-15s|", "Health Level"));
+		System.out.println();
+		System.out.println("|---------------------------------------------------------------|");
+		String[] patientRecords = hospital.retrievePatientRecords();
+		for (String record : patientRecords) {
+			System.out.println(record);
+		}
+		System.out.println();
+		
+	}
+	
 }

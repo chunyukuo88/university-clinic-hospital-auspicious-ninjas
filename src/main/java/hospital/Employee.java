@@ -48,6 +48,21 @@ public class Employee {
 
 	private void setHasBeenPaid(boolean hasBeenPaid) {
 		this.hasBeenPaid = hasBeenPaid;
-	}	
+	}
 
+	public String getEmployeeType() {
+		String employeeType = "";
+		if (this instanceof Doctor) {
+			employeeType = "Doctor";
+		} else if (this instanceof Nurse) {
+			employeeType = "Nurse";
+		} else if (this instanceof Receptionist) {
+			employeeType = "Receptionist";
+		} else if (this instanceof Janitor) {
+			employeeType = "Janitor";
+		} else {
+			employeeType = "Unknown";
+		}
+		return employeeType;
+	}
 }
