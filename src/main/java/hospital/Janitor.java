@@ -18,7 +18,7 @@ public class Janitor extends Employee {
 	}
 
 	public void fightZombies() {
-		Hospital.zombiesInHospital -= 3;
+//		Hospital.zombiesInHospital -= 3;
 	}
 
 }
