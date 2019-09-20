@@ -3,6 +3,7 @@ package hospital;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Collection;
 
@@ -85,5 +86,12 @@ public class HospitalTest {
 		
 		int newEmployeeCount = underTest.retrieveEmployeeList().size();
 		assertThat(newEmployeeCount, is(3));
+	}
+	
+	@Test
+	public void zombiesAreCreatedWithHospital() {
+		Hospital underTest = new Hospital();
+		int expectedNumberOfZombies = underTest.zombies.size();
+		assertEquals(expectedNumberOfZombies, 7);
 	}
 }
