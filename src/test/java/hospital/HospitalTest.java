@@ -66,4 +66,24 @@ public class HospitalTest {
 		assertThat(expectedDoctorHasBeenPaid, is(true));
 		assertThat(expectedNurseHasBeenPaid, is(true));		
 	}
+	
+	@Test
+	public void hospitalCanRemoveEmployee() throws Exception {
+		Hospital underTest = new Hospital();
+		Janitor janitor = new Janitor("Test Janitor");
+		Receptionist receptionist = new Receptionist("Test Receptionist");
+		Doctor doctor = new Doctor("Test Doctor", "General Practitioner");
+		Nurse nurse = new Nurse("Test Nurse", 10);
+		underTest.addEmployeeToHospital(janitor);
+		underTest.addEmployeeToHospital(receptionist);
+		underTest.addEmployeeToHospital(doctor);
+		underTest.addEmployeeToHospital(nurse);
+		int employeeCount = underTest.retrieveEmployeeList().size();
+		
+		underTest.removeEmployeeFromHospital(janitor);
+		employeeCount = employeeCount - 1;
+		
+		int newEmployeeCount = underTest.retrieveEmployeeList().size();
+		assertThat(newEmployeeCount, is(3));
+	}
 }

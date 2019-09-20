@@ -23,11 +23,13 @@ public class HospitalApp {
 
 	private static void displayMenu() {
 		System.out.println("Please choose an option from the following menu:");
-		System.out.println("1. Add an employee to the hospital.     [EMP]");
-		System.out.println("2. Admit a new patient to the hospital. [PAT]");
-		System.out.println("3. View all hospital employees.         [EMV]");
-		System.out.println("4. View all admitted patients.          [PAV]");
-		System.out.println("5. Exit the application.                [END]");
+		System.out.println("1. Add an employee to the hospital.       [EMP]");
+		System.out.println("2. Remove an employee from the hospital.  [REM]");
+		System.out.println("3. Admit a new patient to the hospital.   [PAT]");
+		System.out.println("4. Discharge a patient from the hospital. [RPA]");
+		System.out.println("5. View all hospital employees.           [EMV]");
+		System.out.println("6. View all admitted patients.            [PAV]");
+		System.out.println("7. Exit the application.                  [END]");
 
 		userResponse = scanner.nextLine().trim().toUpperCase();
 		System.out.println();
@@ -35,6 +37,9 @@ public class HospitalApp {
 		switch (userResponse) {
 		case "EMP":
 			addEmployeeToTheHospital();
+			break;
+		case "REM":
+			removeEmployeeFromTheHospital();
 			break;
 		case "PAT":
 			addPatientToTheHospital();
@@ -51,6 +56,35 @@ public class HospitalApp {
 		default:
 			System.out.println("Response not recognized.");
 		}
+	}
+
+	private static void removeEmployeeFromTheHospital() {
+//		stayInMenu = true;
+//		while (stayInMenu) {
+//			
+//			displayEmployeeRecords();
+//			System.out.println("Enter the name of the employee to remove...");
+//			System.out.println();
+//			userResponse = scanner.nextLine().trim().toUpperCase();
+//			System.out.println();
+//
+//				employeeName = scanner.nextLine().trim();
+//				System.out.println();
+//		
+//				hospital.addEmployeeToHospital(doctor);
+//				System.out.println(employeeName + " has been removed.");
+//				System.out.println("Do you want to remove another employee? [Y/N]");
+//				System.out.println();
+//			
+//				switch (userRepsonse) {
+//			case "END":
+//				terminateApplication();
+//				break;
+//			default:
+//				unknownUserResponse();
+//			}
+//		}
+//		stayInMenu = true;		
 	}
 
 	private static void addEmployeeToTheHospital() {

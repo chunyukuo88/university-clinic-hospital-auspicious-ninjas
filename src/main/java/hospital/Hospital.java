@@ -17,6 +17,10 @@ public class Hospital {
 	public void addEmployeeToHospital(Employee employeeToAdd) {
 		employees.put(employeeToAdd.getEmployeeName(), employeeToAdd);
 	}
+	
+	public void removeEmployeeFromHospital(Employee employeeToRemove) {
+		employees.remove(employeeToRemove.getEmployeeName(), employeeToRemove);
+	}
 
 	public void addPatientToHospital(Patient patientToAdd) {
 		patients.put(patientToAdd.getPatientName(), patientToAdd);
