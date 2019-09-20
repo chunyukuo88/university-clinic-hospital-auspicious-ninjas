@@ -1,4 +1,4 @@
-package Hospital;
+package hospital;
 
 import org.junit.Test;
 
