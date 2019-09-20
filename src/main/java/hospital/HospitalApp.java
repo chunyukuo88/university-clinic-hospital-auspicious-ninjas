@@ -23,39 +23,72 @@ public class HospitalApp {
 
 	private static void displayMenu() {
 		System.out.println("Please choose an option from the following menu:");
-		System.out.println("1. Add an employee to the hospital.       [EMP]");
-		System.out.println("2. Remove an employee from the hospital.  [REM]");
-		System.out.println("3. Admit a new patient to the hospital.   [PAT]");
-		System.out.println("4. Discharge a patient from the hospital. [RPA]");
-		System.out.println("5. View all hospital employees.           [EMV]");
-		System.out.println("6. View all admitted patients.            [PAV]");
-		System.out.println("7. Exit the application.                  [END]");
-
+		System.out.println("1. Add an employee to the hospital.      ");
+		System.out.println("2. Remove an employee from the hospital. ");
+		System.out.println("3. Admit a new patient to the hospital.  ");
+		System.out.println("4. Discharge a patient from the hospital.");
+		System.out.println("5. View all hospital employees.          ");
+		System.out.println("6. View all admitted patients.           ");
+		System.out.println("7. Search employee by name.              ");
+		System.out.println("8. Exit the application.                 ");
 		userResponse = scanner.nextLine().trim().toUpperCase();
 		System.out.println();
 
 		switch (userResponse) {
-		case "EMP":
+		case "1":
 			addEmployeeToTheHospital();
 			break;
-		case "REM":
+		case "2":
 			removeEmployeeFromTheHospital();
 			break;
-		case "PAT":
+		case "3":
 			addPatientToTheHospital();
 			break;
-		case "EMV":
+		case "4":
+			removePatientFromHospital();
+			break;
+		case "5":
 			displayEmployeeRecords();
 			break;
-		case "PAV":
+		case "6":
 			displayPatientRecords();
 			break;
-		case "END":
+		case "7":
+			searchByEmployeeName();
+			break;
+		case "8":
 			terminateApplication();
 			break;
 		default:
 			System.out.println("Response not recognized.");
 		}
+	}
+
+	private static void searchByEmployeeName() {
+		System.out.print("Enter the name of the employee:\n>");
+		userResponse = scanner.nextLine();
+		displayEmployeeRecords(userResponse);
+	}
+
+	private static void displayEmployeeRecords(String nameOfEmployee) {
+		System.out.print(String.format("|%-15s", "Employee Number"));
+		System.out.print(String.format("|%-15s", "Employee Name"));
+		System.out.print(String.format("|%-15s", "Employee Type"));
+		System.out.print(String.format("|%-18s", "Medical Specialty"));
+		System.out.print(String.format("|%-15s", "Annual Salary"));
+		System.out.print(String.format("|%-7s" , "Paid?"));
+		System.out.print(String.format("|%-9s|", "Working?"));
+		System.out.println();
+		System.out.println("|----------------------------------------------------------------------------------------------------|");	
+		String[] employeeRecords = hospital.retrieveEmployeeRecords();
+		for (String record : employeeRecords) {
+			System.out.println(record);
+		}
+		System.out.println();
+	}
+
+	private static void removePatientFromHospital() {
+		
 	}
 
 	private static void removeEmployeeFromTheHospital() {
@@ -93,18 +126,18 @@ public class HospitalApp {
 
 			System.out.println("Which type of employee do you want to add?");
 			System.out.println();
-			System.out.println("1. Doctor                 [DOC]");
-			System.out.println("2. Nurse                  [NUR]");
-			System.out.println("3. Receptionist           [REP]");
-			System.out.println("4. Janitor                [JAN]");
-			System.out.println("5. Back to previous menu. [PRE]");
-			System.out.println("6. Exit the application.  [END]");
+			System.out.println("1. Doctor                ");
+			System.out.println("2. Nurse                 ");
+			System.out.println("3. Receptionist          ");
+			System.out.println("4. Janitor               ");
+			System.out.println("5. Back to previous menu.");
+			System.out.println("6. Exit the application. ");
 			userResponse = scanner.nextLine().trim().toUpperCase();
 			System.out.println();
 
 			String employeeName = "";
 			switch (userResponse) {
-			case "DOC":
+			case "1":
 				System.out.println("What is the doctor's name?");
 				employeeName = scanner.nextLine().trim();
 				System.out.println();
@@ -116,7 +149,7 @@ public class HospitalApp {
 				System.out.println("Dr. " + doctor.getEmployeeName() + " has been added.");
 				System.out.println();
 				break;
-			case "NUR":
+			case "2":
 				System.out.println("What is the nurse's name?");
 				employeeName = scanner.nextLine().trim();
 				System.out.println();
@@ -128,7 +161,7 @@ public class HospitalApp {
 				System.out.println("Nurse " + nurse.getEmployeeName() + " has been added.");
 				System.out.println();
 				break;
-			case "REP":
+			case "3":
 				System.out.println("What is the receptionist's name?");
 				employeeName = scanner.nextLine().trim();
 				System.out.println();
@@ -143,7 +176,7 @@ public class HospitalApp {
 					receptionist.setOnThePhone(false);
 				}
 				break;
-			case "JAN":
+			case "4":
 				System.out.println("What is the janitor's name?");
 				employeeName = scanner.nextLine().trim();
 				System.out.println();
@@ -158,10 +191,10 @@ public class HospitalApp {
 					janitor.setSweeping(false);
 				}
 				break;
-			case "PRE":
+			case "5":
 				stayInMenu = false;
 				break;
-			case "END":
+			case "6":
 				terminateApplication();
 				break;
 			default:
@@ -198,7 +231,7 @@ public class HospitalApp {
 		System.out.print(String.format("|%-15s", "Employee Type"));
 		System.out.print(String.format("|%-18s", "Medical Specialty"));
 		System.out.print(String.format("|%-15s", "Annual Salary"));
-		System.out.print(String.format("|%-7s", "Paid?"));
+		System.out.print(String.format("|%-7s" , "Paid?"));
 		System.out.print(String.format("|%-9s|", "Working?"));
 		System.out.println();
 		System.out.println("|----------------------------------------------------------------------------------------------------|");	

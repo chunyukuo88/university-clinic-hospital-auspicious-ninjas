@@ -10,10 +10,8 @@ public class EmployeeTest {
 
 	@Test
 	public void canCreateEmployee() {
-		Employee underTest = new Employee("Diablo");
+		Employee underTest = new Doctor("Diablo", "Ankles");
 		String nameOfEmployee = underTest.getEmployeeName();
 		assertEquals(nameOfEmployee, "Diablo");
 	}
-	
-	
 }

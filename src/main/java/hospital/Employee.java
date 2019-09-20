@@ -1,6 +1,6 @@
 package hospital;
 
-public class Employee {
+public abstract class Employee {
 
 	private String employeeName;
 	private int employeeNumber;
@@ -22,6 +22,10 @@ public class Employee {
 		return employeeName;
 	}
 
+	public void killZombie(Hospital hospital, Zombie zombie) {
+		hospital.removeZombieFromHospital(zombie);
+	}
+	
 	private void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}

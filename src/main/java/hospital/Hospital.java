@@ -5,13 +5,28 @@ import java.util.HashMap;
 
 public class Hospital {
 
-	int zombiesInHospital = 10;
+	HashMap<Integer, Zombie> zombies;
 	HashMap<String, Employee> employees;
 	HashMap<String, Patient> patients;
 
 	public Hospital() {
 		employees = new HashMap<>();
-		patients = new HashMap<>();
+		patients  = new HashMap<>();
+		zombies   = new HashMap<>();
+		Zombie zombie1 = new Zombie(1);
+		Zombie zombie2 = new Zombie(2);
+		Zombie zombie3 = new Zombie(3);
+		Zombie zombie4 = new Zombie(4);
+		Zombie zombie5 = new Zombie(5);
+		Zombie zombie6 = new Zombie(6);
+		Zombie zombie7 = new Zombie(7);
+		addZombieToHospital(zombie1);
+		addZombieToHospital(zombie2);
+		addZombieToHospital(zombie3);
+		addZombieToHospital(zombie4);
+		addZombieToHospital(zombie5);
+		addZombieToHospital(zombie6);
+		addZombieToHospital(zombie7);
 	}
 
 	public void addEmployeeToHospital(Employee employeeToAdd) {
@@ -20,6 +35,10 @@ public class Hospital {
 	
 	public void removeEmployeeFromHospital(Employee employeeToRemove) {
 		employees.remove(employeeToRemove.getEmployeeName(), employeeToRemove);
+	}
+	
+	public void removeZombieFromHospital(Zombie zombie) {
+		zombies.remove(zombie.getZombieID());
 	}
 
 	public void addPatientToHospital(Patient patientToAdd) {
@@ -102,5 +121,10 @@ public class Hospital {
 			i++;
 		}
 		return patientRecordsArray;
+	}
+
+	
+	public void addZombieToHospital(Zombie zombie) {
+		zombies.put(zombie.getZombieID(), zombie);
 	}
 }
