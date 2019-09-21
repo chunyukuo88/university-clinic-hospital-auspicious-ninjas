@@ -92,32 +92,36 @@ public class HospitalApp {
 	}
 
 	private static void removeEmployeeFromTheHospital() {
-//		stayInMenu = true;
-//		while (stayInMenu) {
-//			
-//			displayEmployeeRecords();
-//			System.out.println("Enter the name of the employee to remove...");
-//			System.out.println();
-//			userResponse = scanner.nextLine().trim().toUpperCase();
-//			System.out.println();
-//
-//				employeeName = scanner.nextLine().trim();
-//				System.out.println();
-//		
-//				hospital.addEmployeeToHospital(doctor);
-//				System.out.println(employeeName + " has been removed.");
-//				System.out.println("Do you want to remove another employee? [Y/N]");
-//				System.out.println();
-//			
-//				switch (userRepsonse) {
-//			case "END":
-//				terminateApplication();
-//				break;
-//			default:
-//				unknownUserResponse();
-//			}
-//		}
-//		stayInMenu = true;		
+		stayInMenu = true;
+		while (stayInMenu) {
+			
+			displayEmployeeRecords();
+			System.out.println("Enter the name of the employee to remove, or X to return to the previous menu.");
+			System.out.println();
+			String employeeName = scanner.nextLine().trim().toUpperCase();
+			// take in employeeName, use it to remove an employee (check size before/after?)
+			// check for x to go back and exit this option
+			
+			if (employeeName.equals("X")) {
+				stayInMenu = false;
+				
+			} else {
+				int employeeCountBefore = hospital.employees.size();
+				Employee employeeToRemove = hospital.retrieveEmployee(employeeName);
+				hospital.removeEmployeeFromHospital(employeeToRemove);
+				int employeeCountAfter = hospital.employees.size();
+				
+				if (employeeCountBefore =)
+				System.out.println(employeeName + " has been removed.");
+				
+				System.out.println("Do you want to remove another employee? [Y/N]");
+				userResponse = scanner.nextLine().trim().toUpperCase();
+				if (userResponse.equals("N")) {
+					stayInMenu = false;
+				}
+			}			
+		}
+		stayInMenu = true;		
 	}
 
 	private static void addEmployeeToTheHospital() {

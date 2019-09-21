@@ -37,6 +37,10 @@ public class Hospital {
 		employees.remove(employeeToRemove.getEmployeeName(), employeeToRemove);
 	}
 	
+	public Employee retrieveEmployee(String employeeName) {
+		return employees.get(employeeName);
+	}
+	
 	public void removeZombieFromHospital(Zombie zombie) {
 		zombies.remove(zombie.getZombieID());
 	}
