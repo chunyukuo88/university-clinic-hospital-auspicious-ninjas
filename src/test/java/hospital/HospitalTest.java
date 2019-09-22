@@ -58,10 +58,10 @@ public class HospitalTest {
 		
 		underTest.paySalayForAllEmployees();
 		
-		boolean expectedJanitorHasBeenPaid = janitor.isHasBeenPaid();
-		boolean expectedReceptionistHasBeenPaid = receptionist.isHasBeenPaid();
-		boolean expectedDoctorHasBeenPaid = doctor.isHasBeenPaid();
-		boolean expectedNurseHasBeenPaid = nurse.isHasBeenPaid();
+		boolean expectedJanitorHasBeenPaid = janitor.hasBeenPaid();
+		boolean expectedReceptionistHasBeenPaid = receptionist.hasBeenPaid();
+		boolean expectedDoctorHasBeenPaid = doctor.hasBeenPaid();
+		boolean expectedNurseHasBeenPaid = nurse.hasBeenPaid();
 		assertThat(expectedJanitorHasBeenPaid, is(true));
 		assertThat(expectedReceptionistHasBeenPaid, is(true));
 		assertThat(expectedDoctorHasBeenPaid, is(true));
@@ -80,12 +80,22 @@ public class HospitalTest {
 		underTest.addEmployeeToHospital(doctor);
 		underTest.addEmployeeToHospital(nurse);
 		int employeeCount = underTest.retrieveEmployeeList().size();
-		
-		underTest.removeEmployeeFromHospital(janitor);
-		employeeCount = employeeCount - 1;
-		
+		underTest.removeEmployeeFromHospital(janitor);		
 		int newEmployeeCount = underTest.retrieveEmployeeList().size();
-		assertThat(newEmployeeCount, is(3));
+		assertThat(newEmployeeCount, is(employeeCount-1));
+	}
+	
+	@Test
+	public void hospitalCanRemovePatient() throws Exception {
+		Hospital underTest = new Hospital();
+		Patient patient1 = new Patient("Test Patient 1");
+		Patient patient2 = new Patient("Test Patient 2");
+		underTest.addPatientToHospital(patient1);
+		underTest.addPatientToHospital(patient2);
+		int patientCount = underTest.retrievePatientList().size();
+		underTest.removePatientFromHospital(patient1);		
+		int newPatientCount = underTest.retrievePatientList().size();
+		assertThat(newPatientCount, is(patientCount-1));
 	}
 	
 	@Test
@@ -94,4 +104,17 @@ public class HospitalTest {
 		int expectedNumberOfZombies = underTest.zombies.size();
 		assertEquals(expectedNumberOfZombies, 7);
 	}
+	
+	@Test
+	public void returnFalseIfEmployeeAlreadyPaidThisSession() {
+		Hospital underTest = new Hospital();
+		Receptionist receptionist = new Receptionist("Test Receptionist");
+		Doctor doctor = new Doctor("Test Doctor", "General Practitioner");
+		underTest.addEmployeeToHospital(doctor);
+		underTest.addEmployeeToHospital(receptionist);
+		underTest.paySalayForAllEmployees();
+		boolean canIPayEmployeeAgain = doctor.paySalary();
+		assertEquals(canIPayEmployeeAgain, false);
+	}
+	
 }
