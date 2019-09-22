@@ -1,5 +1,7 @@
 package hospital;
 
+import java.util.Random;
+
 public abstract class Employee {
 
 	private String employeeName;
@@ -9,7 +11,7 @@ public abstract class Employee {
 
 	public Employee(String employeeName) {
 		setEmployeeName(employeeName);
-		setEmployeeNumber(1); // Update to set to a random number.
+		setEmployeeNumber(this.newValue());
 		setSalary(0); 
 		setHasBeenPaid(false);
 	}
@@ -77,5 +79,11 @@ public abstract class Employee {
 			employeeType = "Unknown";
 		}
 		return employeeType;
+	}
+
+	public int newValue() {
+		Random rand = new Random();
+		int randomNum = rand.nextInt(999999);
+		return randomNum;
 	}
 }
