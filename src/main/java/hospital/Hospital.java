@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Hospital {
 
-	HashMap<Integer, Zombie> zombies;
+	HashMap<String, Zombie> zombies;
 	HashMap<String, Employee> employees;
 	HashMap<String, Patient> patients;
 
@@ -14,13 +14,13 @@ public class Hospital {
 		patients = new HashMap<>();
 		zombies = new HashMap<>();
 		
-		Zombie zombie1 = new Zombie(1);
-		Zombie zombie2 = new Zombie(2);
-		Zombie zombie3 = new Zombie(3);
-		Zombie zombie4 = new Zombie(4);
-		Zombie zombie5 = new Zombie(5);
-		Zombie zombie6 = new Zombie(6);
-		Zombie zombie7 = new Zombie(7);
+		Zombie zombie1 = new Zombie();
+		Zombie zombie2 = new Zombie();
+		Zombie zombie3 = new Zombie();
+		Zombie zombie4 = new Zombie();
+		Zombie zombie5 = new Zombie();
+		Zombie zombie6 = new Zombie();
+		Zombie zombie7 = new Zombie();
 		this.addZombieToHospital(zombie1);
 		this.addZombieToHospital(zombie2);
 		this.addZombieToHospital(zombie3);
@@ -56,11 +56,11 @@ public class Hospital {
 	}
 
 	public void addEmployeeToHospital(Employee employeeToAdd) {
-		employees.put(employeeToAdd.getEmployeeName(), employeeToAdd);
+		employees.put(employeeToAdd.getEmployeeNumber(), employeeToAdd);
 	}
 
 	public void removeEmployeeFromHospital(Employee employeeToRemove) {
-		employees.remove(employeeToRemove.getEmployeeName(), employeeToRemove);
+		employees.remove(employeeToRemove.getEmployeeNumber());
 	}
 
 	public Employee retrieveEmployee(String employeeName) {
@@ -76,7 +76,7 @@ public class Hospital {
 	}
 
 	public void addPatientToHospital(Patient patientToAdd) {
-		patients.put(patientToAdd.getPatientName(), patientToAdd);
+		patients.put(patientToAdd.getPatientNumber(), patientToAdd);
 	}
 
 	public Collection<Employee> retrieveEmployeeList() {
@@ -104,7 +104,7 @@ public class Hospital {
 			ableToPayEmployee = employee.paySalary();
 			employeePaidStatus = ((ableToPayEmployee) ? "Paid Successfully" : "Previously Paid");
 
-			employeePayrollRecord = (String.format("|%-15d", employee.getEmployeeNumber()))
+			employeePayrollRecord = (String.format("|%-15s", employee.getEmployeeNumber()))
 					+ (String.format("|%-15s", employeeName)) 
 					+ (String.format("|%-15s", employeeType))
 					+ (String.format("|%,-15d", employeeSalary)) 
@@ -152,8 +152,9 @@ public class Hospital {
 				isEmployeeWorking = "";
 			}
 
-			employeeRecord = (String.format("|%-15d", employee.getEmployeeNumber()))
-					+ (String.format("|%-15s", employee.getEmployeeName())) + (String.format("|%-15s", employeeType))
+			employeeRecord = (String.format("|%-15s", employee.getEmployeeNumber()))
+					+ (String.format("|%-15s", employee.getEmployeeName())) 
+					+ (String.format("|%-15s", employeeType))
 					+ (String.format("|%-18s", employeeMedicalSpecialty))
 					+ (String.format("|%,-15d", employee.getSalary()))
 					+ (String.format("|%-7s", ((employee.hasBeenPaid()) ? "Yes" : "No")))
@@ -169,7 +170,7 @@ public class Hospital {
 		String patientRecord = "";
 		int i = 0;
 		for (Patient patient : patients.values()) {
-			patientRecord = (String.format("|%-15d", patient.getPatientNumber()))
+			patientRecord = (String.format("|%-15s", patient.getPatientNumber()))
 					+ (String.format("|%-15s", patient.getPatientName()))
 					+ (String.format("|%-15d", patient.getBloodLevel()))
 					+ (String.format("|%-15d", patient.getHealthLevel()));
@@ -184,7 +185,7 @@ public class Hospital {
 	}
 
 	public void removePatientFromHospital(Patient patient) {
-		patients.remove(patient.getPatientName(), patient);
+		patients.remove(patient.getPatientNumber());
 	}
 
 	public String retrieveEmployeeRecord(Employee selectedEmployee) {
@@ -220,7 +221,7 @@ public class Hospital {
 			isEmployeeWorking = "";
 		}
 
-		employeeRecord = (String.format("|%-15d", selectedEmployee.getEmployeeNumber()))
+		employeeRecord = (String.format("|%-15s", selectedEmployee.getEmployeeNumber()))
 				+ (String.format("|%-15s", selectedEmployee.getEmployeeName()))
 				+ (String.format("|%-15s", employeeType)) + (String.format("|%-18s", employeeMedicalSpecialty))
 				+ (String.format("|%,-15d", selectedEmployee.getSalary()))

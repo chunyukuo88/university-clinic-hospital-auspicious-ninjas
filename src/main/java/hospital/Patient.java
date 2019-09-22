@@ -1,15 +1,22 @@
 package hospital;
 
+import java.util.Random;
+
 public class Patient {
 
 	private String patientName = "";
-	private int patientNumber = 1; // change to random number
+	private String patientNumber = "";
 	private int bloodLevel = 20;
 	private int healthLevel = 10;
 	
 	public Patient(String nameOfPatient) {
 		this.setPatientName(nameOfPatient);
-		patientNumber++;
+		this.setPatientNumber();
+	}
+
+	private void setPatientNumber() {
+		String patientNumber = String.valueOf(newValue());
+		this.patientNumber = patientNumber;
 	}
 
 	public String getPatientName() {
@@ -36,8 +43,14 @@ public class Patient {
 		this.healthLevel = healthLevel;
 	}
 
-	public Integer getPatientNumber() {
+	public String getPatientNumber() {
 		return patientNumber;
+	}
+	
+	public int newValue() {
+		Random rand = new Random();
+		int randomNum = rand.nextInt(999999);
+		return randomNum;
 	}
 	
 }
