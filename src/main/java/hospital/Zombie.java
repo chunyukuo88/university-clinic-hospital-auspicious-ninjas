@@ -1,9 +1,16 @@
 package hospital;
 
+import java.util.Random;
+
 public class Zombie {
 
-	int	zombieHP = 70; //Maybe give max of 100 at some point.
-	int zombieID = 0;
+	int	zombieHP = 0; 
+	String zombieID = "";
+	
+	public Zombie() {
+		this.zombieID = String.valueOf(this.newValue(999999));
+		this.zombieHP = this.newValue(100);
+	}
 	
 	public int getZombieHP() {
 		return zombieHP;
@@ -13,15 +20,17 @@ public class Zombie {
 		this.zombieHP = zombieHP;
 	}
 
-	public int getZombieID() {
+	public String getZombieID() {
 		return zombieID;
 	}
 
-	public void setZombieID(int zombieID) {
+	public void setZombieID(String zombieID) {
 		this.zombieID = zombieID;
-	}
-
-	public Zombie(int idOfZombie) {
-		this.zombieID = idOfZombie;
+	}	
+	
+	public int newValue(int maxValue) {
+		Random rand = new Random();
+		int randomNum = rand.nextInt(maxValue);
+		return randomNum;
 	}
 }

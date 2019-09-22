@@ -23,7 +23,7 @@ public class JanitorTest {
 	public void janitorCanKillZombies() {
 		Janitor underTest = new Janitor("Bjarne Stroustrup");
 		Hospital testHospital = new Hospital();
-		Zombie testZombie = new Zombie(8);
+		Zombie testZombie = new Zombie();
 		testHospital.addEmployeeToHospital(underTest);
 		testHospital.addZombieToHospital(testZombie);
 		underTest.killZombie(testHospital, testZombie);

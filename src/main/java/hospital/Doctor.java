@@ -8,7 +8,7 @@ public class Doctor extends Medical implements DrawBlood {
 		super(employeeName);
 		this.specialtyArea = specialtyArea;
 		setSalary(90_000);
-	}
+	}	
 
 	public String getSpecialtyArea() {
 		return specialtyArea;

@@ -2,6 +2,7 @@ package hospital;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 
@@ -20,8 +21,9 @@ public class HospitalTest {
 
 	@Test
 	public void hospitalCanHaveEmployees() throws Exception {
-		Hospital underTest 	 	  = new Hospital();
-		Janitor janitor 		  = new Janitor("Test Janitor");
+		Hospital underTest = new Hospital();
+		int employeeInitalCount = underTest.employees.size();
+		Janitor janitor = new Janitor("Test Janitor");
 		Receptionist receptionist = new Receptionist("Test Receptionist");
 		Doctor doctor 			  = new Doctor("Test Doctor", "General Practitioner");
 		Nurse nurse 			  = new Nurse("Test Nurse", 10);
@@ -29,19 +31,23 @@ public class HospitalTest {
 		underTest.addEmployeeToHospital(receptionist);
 		underTest.addEmployeeToHospital(doctor);
 		underTest.addEmployeeToHospital(nurse);
-		Collection<Employee> employees = underTest.retrieveEmployeeList();
-		assertThat(employees, containsInAnyOrder(janitor, receptionist, doctor, nurse));
+		int addedEmployees = 4;
+		int employeeNewCount = underTest.employees.size();
+		assertEquals(employeeNewCount, employeeInitalCount + addedEmployees);
+		
+		
 	}
 
 	@Test
 	public void hospitalCanHavePatients() throws Exception {
 		Hospital underTest = new Hospital();
-		Patient patient1 = new Patient("Test Patient 1");
-		Patient patient2 = new Patient("Test Patient 2");	
-		underTest.addPatientToHospital(patient1);
-		underTest.addPatientToHospital(patient2);
-		Collection<Patient> patients = underTest.retrievePatientList();		
-		assertThat(patients, containsInAnyOrder(patient1, patient2));		
+		int patientCount = underTest.patients.size();
+		Patient patientTest1 = new Patient("Test Patient 1");
+		Patient patientTest2 = new Patient("Test Patient 2");	
+		underTest.addPatientToHospital(patientTest1);
+		underTest.addPatientToHospital(patientTest2);
+		int patientCountAfterAddingPatients = underTest.patients.size();
+		assertEquals(patientCountAfterAddingPatients, patientCount+2);
 	}
 	
 	@Test

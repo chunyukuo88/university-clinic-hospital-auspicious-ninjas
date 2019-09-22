@@ -182,17 +182,18 @@ public class HospitalApp {
 		while (stayInMenu) {
 
 			displayPatientRecords();
-			System.out.println("Enter the name of the patient to remove, or X to return to the previous menu.");
-			String patientName = scanner.nextLine();
+			System.out.println("Enter the Patient Number of the patient to remove, or X to return to the previous menu.");
+			String patientNumber = scanner.nextLine();
 			System.out.println();
 
-			if (patientName.equals("X") || patientName.equals("x")) {
+			if (patientNumber.equals("X") || patientNumber.equals("x")) {
 				stayInMenu = false;
 
 			} else {
-				Patient patientToRemove = hospital.retrievePatient(patientName);
+				Patient patientToRemove = hospital.retrievePatient(patientNumber);
+				String patientName = patientToRemove.getPatientName();
 				hospital.removePatientFromHospital(patientToRemove);
-				System.out.println(patientName + " has been removed.");
+				System.out.println(patientName + " (" + patientNumber + ") has been removed.");
 
 				System.out.println("Do you want to remove another patient? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
@@ -209,17 +210,18 @@ public class HospitalApp {
 		while (stayInMenu) {
 
 			displayEmployeeRecords();
-			System.out.println("Enter the name of the employee to remove, or X to return to the previous menu.");
-			String employeeName = scanner.nextLine();
+			System.out.println("Enter the Employee Number of the employee to remove, or X to return to the previous menu.");
+			String employeeNumber = scanner.nextLine();
 			System.out.println();
 
-			if (employeeName.equals("X") || employeeName.equals("x")) {
+			if (employeeNumber.equals("X") || employeeNumber.equals("x")) {
 				stayInMenu = false;
 
 			} else {
-				Employee employeeToRemove = hospital.retrieveEmployee(employeeName);
+				Employee employeeToRemove = hospital.retrieveEmployee(employeeNumber);
+				String employeeName = employeeToRemove.getEmployeeName();
 				hospital.removeEmployeeFromHospital(employeeToRemove);
-				System.out.println(employeeName + " has been removed.");
+				System.out.println(employeeName + " (" + employeeNumber + ") has been removed.");
 
 				System.out.println("Do you want to remove another employee? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
@@ -257,7 +259,7 @@ public class HospitalApp {
 				System.out.println();
 				Doctor doctor = new Doctor(employeeName, userResponse);
 				hospital.addEmployeeToHospital(doctor);
-				System.out.println("Dr. " + doctor.getEmployeeName() + " has been added.");
+				System.out.println("Dr. " + doctor.getEmployeeName() + " (" + doctor.getEmployeeNumber() + ") has been added.");
 				System.out.println();
 				break;
 			case "2":
@@ -269,7 +271,7 @@ public class HospitalApp {
 				System.out.println();
 				Nurse nurse = new Nurse(employeeName, Integer.parseInt(userResponse));
 				hospital.addEmployeeToHospital(nurse);
-				System.out.println("Nurse " + nurse.getEmployeeName() + " has been added.");
+				System.out.println("Nurse " + nurse.getEmployeeName() + " (" + nurse.getEmployeeNumber() + ")  has been added.");
 				System.out.println();
 				break;
 			case "3":
@@ -278,7 +280,7 @@ public class HospitalApp {
 				System.out.println();
 				Receptionist receptionist = new Receptionist(employeeName);
 				hospital.addEmployeeToHospital(receptionist);
-				System.out.println("Receptionist " + receptionist.getEmployeeName() + " has been added.");
+				System.out.println("Receptionist " + receptionist.getEmployeeName() + " (" + receptionist.getEmployeeNumber() + ")  has been added.");
 				System.out.println();
 				System.out.println("Is " + receptionist.getEmployeeName() + " currently on the phone? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
@@ -293,7 +295,7 @@ public class HospitalApp {
 				System.out.println();
 				Janitor janitor = new Janitor(employeeName);
 				hospital.addEmployeeToHospital(janitor);
-				System.out.println("Janitor " + janitor.getEmployeeName() + " has been added.");
+				System.out.println("Janitor " + janitor.getEmployeeName() + " (" + janitor.getEmployeeNumber() + ")  has been added.");
 				System.out.println();
 				System.out.println("Is " + janitor.getEmployeeName() + " currently sweeping? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
@@ -321,7 +323,7 @@ public class HospitalApp {
 		Patient patient = new Patient(userResponse);
 		hospital.addPatientToHospital(patient);
 		System.out.println();
-		System.out.println("Patient " + patient.getPatientName() + " has been admitted to the hospital.");
+		System.out.println("Patient " + patient.getPatientName() + " (" + patient.getPatientNumber() + ") has been admitted to the hospital.");
 		System.out.println();
 	}
 
