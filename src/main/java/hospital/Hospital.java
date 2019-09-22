@@ -41,6 +41,10 @@ public class Hospital {
 		return employees.get(employeeName);
 	}
 	
+	public Patient retrievePatient(String patientName) {
+		return patients.get(patientName);
+	}
+	
 	public void removeZombieFromHospital(Zombie zombie) {
 		zombies.remove(zombie.getZombieID());
 	}
@@ -130,5 +134,9 @@ public class Hospital {
 	
 	public void addZombieToHospital(Zombie zombie) {
 		zombies.put(zombie.getZombieID(), zombie);
+	}
+
+	public void removePatientFromHospital(Patient patient) {
+		patients.remove(patient.getPatientName(), patient);		
 	}
 }

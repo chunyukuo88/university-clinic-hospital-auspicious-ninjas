@@ -76,10 +76,11 @@ public class HospitalApp {
 		System.out.print(String.format("|%-15s", "Employee Type"));
 		System.out.print(String.format("|%-18s", "Medical Specialty"));
 		System.out.print(String.format("|%-15s", "Annual Salary"));
-		System.out.print(String.format("|%-7s" , "Paid?"));
+		System.out.print(String.format("|%-7s", "Paid?"));
 		System.out.print(String.format("|%-9s|", "Working?"));
 		System.out.println();
-		System.out.println("|----------------------------------------------------------------------------------------------------|");	
+		System.out.println(
+				"|----------------------------------------------------------------------------------------------------|");
 		String[] employeeRecords = hospital.retrieveEmployeeRecords();
 		for (String record : employeeRecords) {
 			System.out.println(record);
@@ -88,40 +89,57 @@ public class HospitalApp {
 	}
 
 	private static void removePatientFromHospital() {
-		
+		stayInMenu = true;
+		while (stayInMenu) {
+
+			displayPatientRecords();
+			System.out.println("Enter the name of the patient to remove, or X to return to the previous menu.");
+			String patientName = scanner.nextLine();
+			System.out.println();
+
+			if (patientName.equals("X") || patientName.equals("x")) {
+				stayInMenu = false;
+
+			} else {
+				Patient patientToRemove = hospital.retrievePatient(patientName);
+				hospital.removePatientFromHospital(patientToRemove);
+				System.out.println(patientName + " has been removed.");
+
+				System.out.println("Do you want to remove another patient? [Y/N]");
+				userResponse = scanner.nextLine().trim().toUpperCase();
+				if (userResponse.equals("N")) {
+					stayInMenu = false;
+				}
+			}
+		}
+		stayInMenu = true;
 	}
 
 	private static void removeEmployeeFromTheHospital() {
 		stayInMenu = true;
 		while (stayInMenu) {
-			
+
 			displayEmployeeRecords();
 			System.out.println("Enter the name of the employee to remove, or X to return to the previous menu.");
+			String employeeName = scanner.nextLine();
 			System.out.println();
-			String employeeName = scanner.nextLine().trim().toUpperCase();
-			// take in employeeName, use it to remove an employee (check size before/after?)
-			// check for x to go back and exit this option
-			
-			if (employeeName.equals("X")) {
+
+			if (employeeName.equals("X") || employeeName.equals("x")) {
 				stayInMenu = false;
-				
+
 			} else {
-				int employeeCountBefore = hospital.employees.size();
 				Employee employeeToRemove = hospital.retrieveEmployee(employeeName);
 				hospital.removeEmployeeFromHospital(employeeToRemove);
-				int employeeCountAfter = hospital.employees.size();
-				
-				if (employeeCountBefore =)
 				System.out.println(employeeName + " has been removed.");
-				
+
 				System.out.println("Do you want to remove another employee? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
 				if (userResponse.equals("N")) {
 					stayInMenu = false;
 				}
-			}			
+			}
 		}
-		stayInMenu = true;		
+		stayInMenu = true;
 	}
 
 	private static void addEmployeeToTheHospital() {
@@ -217,7 +235,7 @@ public class HospitalApp {
 		System.out.println("Patient " + patient.getPatientName() + " has been admitted to the hospital.");
 		System.out.println();
 	}
-	
+
 	private static void terminateApplication() {
 		System.out.println("Thank you for using the University Clinic Hospital application.");
 		System.out.println("Have a nice day!");
@@ -235,17 +253,18 @@ public class HospitalApp {
 		System.out.print(String.format("|%-15s", "Employee Type"));
 		System.out.print(String.format("|%-18s", "Medical Specialty"));
 		System.out.print(String.format("|%-15s", "Annual Salary"));
-		System.out.print(String.format("|%-7s" , "Paid?"));
+		System.out.print(String.format("|%-7s", "Paid?"));
 		System.out.print(String.format("|%-9s|", "Working?"));
 		System.out.println();
-		System.out.println("|----------------------------------------------------------------------------------------------------|");	
+		System.out.println(
+				"|----------------------------------------------------------------------------------------------------|");
 		String[] employeeRecords = hospital.retrieveEmployeeRecords();
 		for (String record : employeeRecords) {
 			System.out.println(record);
 		}
 		System.out.println();
 	}
-	
+
 	private static void displayPatientRecords() {
 		System.out.println("Patients:");
 		System.out.print(String.format("|%-15s", "Patient Number"));
@@ -259,7 +278,7 @@ public class HospitalApp {
 			System.out.println(record);
 		}
 		System.out.println();
-		
+
 	}
-	
+
 }
