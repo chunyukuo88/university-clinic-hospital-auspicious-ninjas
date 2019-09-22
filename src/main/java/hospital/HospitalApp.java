@@ -118,7 +118,7 @@ public class HospitalApp {
 				// WIP: Add another sub-menu for employee actions.
 				break;
 			case "4":
-				hospital.paySalayForAllEmployees();
+				submitEmployeePayroll();
 				break;
 			case "5":
 				displayEmployeeRecords();
@@ -134,6 +134,24 @@ public class HospitalApp {
 			}
 		}
 		stayInMenu = true;
+	}
+
+	private static void submitEmployeePayroll() {
+		System.out.println("Results from Employee Payroll Submission");
+		System.out.print(String.format("|%-15s", "Employee Number"));
+		System.out.print(String.format("|%-15s", "Employee Name"));
+		System.out.print(String.format("|%-15s", "Employee Type"));
+		System.out.print(String.format("|%-15s", "Annual Salary"));
+		System.out.print(String.format("|%-19s", "Payroll Status"));
+		System.out.println();
+		System.out.println(
+				"|----------------------------------------------------------------------------------------------------|");
+		String[] employeePayrollRecords = hospital.paySalayForAllEmployees();
+		for (String record : employeePayrollRecords) {
+			System.out.println(record);
+		}
+		System.out.println();
+		
 	}
 
 	private static void searchByEmployeeName() {

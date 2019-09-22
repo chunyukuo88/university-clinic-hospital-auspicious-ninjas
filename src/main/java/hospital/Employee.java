@@ -10,12 +10,21 @@ public abstract class Employee {
 	public Employee(String employeeName) {
 		setEmployeeName(employeeName);
 		setEmployeeNumber(1); // Update to set to a random number.
-		setSalary(0); // Change for each subclass...
+		setSalary(0); 
 		setHasBeenPaid(false);
 	}
 
-	public void paySalary() {
-		setHasBeenPaid(true);
+	public boolean paySalary() {
+		
+		boolean ableToPayEmployee = true;
+		
+		if (this.hasBeenPaid()) {
+			ableToPayEmployee = false;
+		} else {
+			setHasBeenPaid(true);
+		}
+		
+		return ableToPayEmployee;
 	};
 
 	public String getEmployeeName() {
@@ -46,7 +55,7 @@ public abstract class Employee {
 		this.salary = salary;
 	}
 
-	public boolean isHasBeenPaid() {
+	public boolean hasBeenPaid() {
 		return hasBeenPaid;
 	}
 

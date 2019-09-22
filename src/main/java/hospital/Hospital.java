@@ -13,6 +13,7 @@ public class Hospital {
 		employees = new HashMap<>();
 		patients = new HashMap<>();
 		zombies = new HashMap<>();
+		
 		Zombie zombie1 = new Zombie(1);
 		Zombie zombie2 = new Zombie(2);
 		Zombie zombie3 = new Zombie(3);
@@ -20,13 +21,38 @@ public class Hospital {
 		Zombie zombie5 = new Zombie(5);
 		Zombie zombie6 = new Zombie(6);
 		Zombie zombie7 = new Zombie(7);
-		addZombieToHospital(zombie1);
-		addZombieToHospital(zombie2);
-		addZombieToHospital(zombie3);
-		addZombieToHospital(zombie4);
-		addZombieToHospital(zombie5);
-		addZombieToHospital(zombie6);
-		addZombieToHospital(zombie7);
+		this.addZombieToHospital(zombie1);
+		this.addZombieToHospital(zombie2);
+		this.addZombieToHospital(zombie3);
+		this.addZombieToHospital(zombie4);
+		this.addZombieToHospital(zombie5);
+		this.addZombieToHospital(zombie6);
+		this.addZombieToHospital(zombie7);
+		
+		Doctor doctor1 = new Doctor("Dr. DoLittle", "Toenails");
+		Doctor doctor2 = new Doctor("Dr. Who", "Space-Time");
+		Nurse nurse1 = new Nurse("Wanda Sparks", 10);
+		Nurse nurse2 = new Nurse("Mary Poppins", 10);
+		Receptionist receptionist1 = new Receptionist("Cassie Fancher");
+		Receptionist receptionist2 = new Receptionist("Polly Maynard");
+		Janitor janitor1 = new Janitor("Chip Dipp");
+		Janitor janitor2 = new Janitor("Larry Fisher");
+		this.addEmployeeToHospital(doctor1);
+		this.addEmployeeToHospital(doctor2);
+		this.addEmployeeToHospital(nurse1);
+		this.addEmployeeToHospital(nurse2);
+		this.addEmployeeToHospital(receptionist1);
+		this.addEmployeeToHospital(receptionist2);
+		this.addEmployeeToHospital(janitor1);
+		this.addEmployeeToHospital(janitor2);
+		
+		Patient patient1 = new Patient("Iam Sick");
+		Patient patient2 = new Patient("Help MePlease");
+		Patient patient3 = new Patient("Inna Koma");
+		this.addPatientToHospital(patient1);
+		this.addPatientToHospital(patient2);
+		this.addPatientToHospital(patient3);
+		
 	}
 
 	public void addEmployeeToHospital(Employee employeeToAdd) {
@@ -61,10 +87,33 @@ public class Hospital {
 		return patients.values();
 	}
 
-	public void paySalayForAllEmployees() {
+	public String[] paySalayForAllEmployees() {
+		String[] employeePayroll = new String[employees.size()];
+		String employeePayrollRecord = "";
+		int i = 0;
+		boolean ableToPayEmployee = true;
+		String employeeName = "";
+		String employeeType = "";
+		String employeePaidStatus = "";
+		int employeeSalary = 0;
+
 		for (Employee employee : employees.values()) {
-			employee.paySalary();
+			employeeName = employee.getEmployeeName();
+			employeeType = employee.getEmployeeType();
+			employeeSalary = employee.getSalary();
+			ableToPayEmployee = employee.paySalary();
+			employeePaidStatus = ((ableToPayEmployee) ? "Paid Successfully" : "Previously Paid");
+
+			employeePayrollRecord = (String.format("|%-15d", employee.getEmployeeNumber()))
+					+ (String.format("|%-15s", employeeName)) 
+					+ (String.format("|%-15s", employeeType))
+					+ (String.format("|%,-15d", employeeSalary)) 
+					+ (String.format("|%-19s", employeePaidStatus));
+
+			employeePayroll[i] = employeePayrollRecord;
+			i++;
 		}
+		return employeePayroll;
 	}
 
 	public String[] retrieveEmployeeRecords() {
@@ -107,7 +156,7 @@ public class Hospital {
 					+ (String.format("|%-15s", employee.getEmployeeName())) + (String.format("|%-15s", employeeType))
 					+ (String.format("|%-18s", employeeMedicalSpecialty))
 					+ (String.format("|%,-15d", employee.getSalary()))
-					+ (String.format("|%-7s", ((employee.isHasBeenPaid()) ? "Yes" : "No")))
+					+ (String.format("|%-7s", ((employee.hasBeenPaid()) ? "Yes" : "No")))
 					+ (String.format("|%-9s|", isEmployeeWorking));
 			employeeRecordsArray[i] = employeeRecord;
 			i++;
@@ -137,7 +186,6 @@ public class Hospital {
 	public void removePatientFromHospital(Patient patient) {
 		patients.remove(patient.getPatientName(), patient);
 	}
-	
 
 	public String retrieveEmployeeRecord(Employee selectedEmployee) {
 
@@ -176,7 +224,7 @@ public class Hospital {
 				+ (String.format("|%-15s", selectedEmployee.getEmployeeName()))
 				+ (String.format("|%-15s", employeeType)) + (String.format("|%-18s", employeeMedicalSpecialty))
 				+ (String.format("|%,-15d", selectedEmployee.getSalary()))
-				+ (String.format("|%-7s", ((selectedEmployee.isHasBeenPaid()) ? "Yes" : "No")))
+				+ (String.format("|%-7s", ((selectedEmployee.hasBeenPaid()) ? "Yes" : "No")))
 				+ (String.format("|%-9s|", isEmployeeWorking));
 
 		return employeeRecord;
