@@ -11,8 +11,8 @@ public class Hospital {
 
 	public Hospital() {
 		employees = new HashMap<>();
-		patients  = new HashMap<>();
-		zombies   = new HashMap<>();
+		patients = new HashMap<>();
+		zombies = new HashMap<>();
 		Zombie zombie1 = new Zombie(1);
 		Zombie zombie2 = new Zombie(2);
 		Zombie zombie3 = new Zombie(3);
@@ -32,19 +32,19 @@ public class Hospital {
 	public void addEmployeeToHospital(Employee employeeToAdd) {
 		employees.put(employeeToAdd.getEmployeeName(), employeeToAdd);
 	}
-	
+
 	public void removeEmployeeFromHospital(Employee employeeToRemove) {
 		employees.remove(employeeToRemove.getEmployeeName(), employeeToRemove);
 	}
-	
+
 	public Employee retrieveEmployee(String employeeName) {
 		return employees.get(employeeName);
 	}
-	
+
 	public Patient retrievePatient(String patientName) {
 		return patients.get(patientName);
 	}
-	
+
 	public void removeZombieFromHospital(Zombie zombie) {
 		zombies.remove(zombie.getZombieID());
 	}
@@ -104,8 +104,7 @@ public class Hospital {
 			}
 
 			employeeRecord = (String.format("|%-15d", employee.getEmployeeNumber()))
-					+ (String.format("|%-15s", employee.getEmployeeName()))
-					+ (String.format("|%-15s", employeeType)) 
+					+ (String.format("|%-15s", employee.getEmployeeName())) + (String.format("|%-15s", employeeType))
 					+ (String.format("|%-18s", employeeMedicalSpecialty))
 					+ (String.format("|%,-15d", employee.getSalary()))
 					+ (String.format("|%-7s", ((employee.isHasBeenPaid()) ? "Yes" : "No")))
@@ -131,12 +130,55 @@ public class Hospital {
 		return patientRecordsArray;
 	}
 
-	
 	public void addZombieToHospital(Zombie zombie) {
 		zombies.put(zombie.getZombieID(), zombie);
 	}
 
 	public void removePatientFromHospital(Patient patient) {
-		patients.remove(patient.getPatientName(), patient);		
+		patients.remove(patient.getPatientName(), patient);
+	}
+	
+
+	public String retrieveEmployeeRecord(Employee selectedEmployee) {
+
+		String employeeRecord = "";
+		String employeeType = "";
+		String employeeMedicalSpecialty = "";
+		String isEmployeeWorking = "";
+
+		if (selectedEmployee instanceof Doctor) {
+			Doctor doctor = (Doctor) selectedEmployee;
+			employeeType = doctor.getEmployeeType();
+			employeeMedicalSpecialty = doctor.getSpecialtyArea();
+			isEmployeeWorking = "";
+		} else if (selectedEmployee instanceof Nurse) {
+			Nurse nurse = (Nurse) selectedEmployee;
+			employeeType = nurse.getEmployeeType();
+			employeeMedicalSpecialty = "Ward Max: " + String.valueOf(nurse.getNumberOfPatients());
+			isEmployeeWorking = "";
+		} else if (selectedEmployee instanceof Receptionist) {
+			Receptionist receptionist = (Receptionist) selectedEmployee;
+			employeeType = receptionist.getEmployeeType();
+			employeeMedicalSpecialty = "";
+			isEmployeeWorking = (receptionist.isOnThePhone()) ? "Yes" : "No";
+		} else if (selectedEmployee instanceof Janitor) {
+			Janitor janitor = (Janitor) selectedEmployee;
+			employeeType = janitor.getEmployeeType();
+			employeeMedicalSpecialty = "";
+			isEmployeeWorking = (janitor.getSweeping()) ? "Yes" : "No";
+		} else {
+			employeeType = selectedEmployee.getEmployeeType();
+			employeeMedicalSpecialty = "";
+			isEmployeeWorking = "";
+		}
+
+		employeeRecord = (String.format("|%-15d", selectedEmployee.getEmployeeNumber()))
+				+ (String.format("|%-15s", selectedEmployee.getEmployeeName()))
+				+ (String.format("|%-15s", employeeType)) + (String.format("|%-18s", employeeMedicalSpecialty))
+				+ (String.format("|%,-15d", selectedEmployee.getSalary()))
+				+ (String.format("|%-7s", ((selectedEmployee.isHasBeenPaid()) ? "Yes" : "No")))
+				+ (String.format("|%-9s|", isEmployeeWorking));
+
+		return employeeRecord;
 	}
 }

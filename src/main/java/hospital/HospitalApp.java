@@ -22,41 +22,28 @@ public class HospitalApp {
 	}
 
 	private static void displayMenu() {
-		System.out.println("Please choose an option from the following menu:");
-		System.out.println("1. Add an employee to the hospital.      ");
-		System.out.println("2. Remove an employee from the hospital. ");
-		System.out.println("3. Admit a new patient to the hospital.  ");
-		System.out.println("4. Discharge a patient from the hospital.");
-		System.out.println("5. View all hospital employees.          ");
-		System.out.println("6. View all admitted patients.           ");
-		System.out.println("7. Search employee by name.              ");
-		System.out.println("8. Exit the application.                 ");
-		userResponse = scanner.nextLine().trim().toUpperCase();
+		System.out.println("MAIN MENU");
+		System.out.println("Please enter a number from these options:");
+		System.out.println();
+		System.out.println("1. Employees Menu");
+		System.out.println("2. Patients Menu");
+		System.out.println("3. View Records");
+		System.out.println("0. Exit");
+		userResponse = scanner.nextLine();
 		System.out.println();
 
 		switch (userResponse) {
 		case "1":
-			addEmployeeToTheHospital();
+			displayEmployeeMenu();
 			break;
 		case "2":
-			removeEmployeeFromTheHospital();
+			displayPatientMenu();
 			break;
 		case "3":
-			addPatientToTheHospital();
-			break;
-		case "4":
-			removePatientFromHospital();
-			break;
-		case "5":
 			displayEmployeeRecords();
-			break;
-		case "6":
 			displayPatientRecords();
 			break;
-		case "7":
-			searchByEmployeeName();
-			break;
-		case "8":
+		case "0":
 			terminateApplication();
 			break;
 		default:
@@ -64,13 +51,98 @@ public class HospitalApp {
 		}
 	}
 
+	private static void displayPatientMenu() {
+		stayInMenu = true;
+		while (stayInMenu) {
+			System.out.println("PATIENT MENU");
+			System.out.println("Please enter a number from these options:");
+			System.out.println();
+			System.out.println("1. Admit a patient to the hospital.");
+			System.out.println("2. Discharge a patient from the hospital.");
+			System.out.println("3. View patient records.");
+			System.out.println("4. Back to main menu.");
+			System.out.println("0. Exit.");
+
+			userResponse = scanner.nextLine();
+			System.out.println();
+
+			switch (userResponse) {
+			case "1":
+				addPatientToTheHospital();
+				break;
+			case "2":
+				removePatientFromHospital();
+				break;
+			case "3":
+				displayPatientRecords();
+				break;
+			case "4":
+				stayInMenu = false;
+				break;
+			case "0":
+				terminateApplication();
+				break;
+			default:
+				System.out.println("Response not recognized.");
+			}
+		}
+		stayInMenu = true;
+	}
+
+	private static void displayEmployeeMenu() {
+		stayInMenu = true;
+		while (stayInMenu) {
+			System.out.println("EMPLOYEE MENU");
+			System.out.println("Please enter a number from these options:");
+			System.out.println();
+			System.out.println("1. Add an employee to the hospital.");
+			System.out.println("2. Remove an employee from the hospital.");
+			System.out.println("3. Search for one employee.");
+			System.out.println("4. Pay all employees.");
+			System.out.println("5. View employee records.");
+			System.out.println("6. Back to main menu.");
+			System.out.println("0. Exit.");
+
+			userResponse = scanner.nextLine().trim().toUpperCase();
+			System.out.println();
+
+			switch (userResponse) {
+			case "1":
+				addEmployeeToTheHospital();
+				break;
+			case "2":
+				removeEmployeeFromTheHospital();
+				break;
+			case "3":
+				searchByEmployeeName();
+				// WIP: Add another sub-menu for employee actions.
+				break;
+			case "4":
+				hospital.paySalayForAllEmployees();
+				break;
+			case "5":
+				displayEmployeeRecords();
+				break;
+			case "6":
+				stayInMenu = false;
+				break;
+			case "0":
+				terminateApplication();
+				break;
+			default:
+				System.out.println("Response not recognized.");
+			}
+		}
+		stayInMenu = true;
+	}
+
 	private static void searchByEmployeeName() {
 		System.out.print("Enter the name of the employee:\n>");
 		userResponse = scanner.nextLine();
-		displayEmployeeRecords(userResponse);
+		displayEmployeeRecord(userResponse);
 	}
 
-	private static void displayEmployeeRecords(String nameOfEmployee) {
+	private static void displayEmployeeRecord(String nameOfEmployee) {
 		System.out.print(String.format("|%-15s", "Employee Number"));
 		System.out.print(String.format("|%-15s", "Employee Name"));
 		System.out.print(String.format("|%-15s", "Employee Type"));
@@ -81,10 +153,9 @@ public class HospitalApp {
 		System.out.println();
 		System.out.println(
 				"|----------------------------------------------------------------------------------------------------|");
-		String[] employeeRecords = hospital.retrieveEmployeeRecords();
-		for (String record : employeeRecords) {
-			System.out.println(record);
-		}
+		Employee selectedEmployee = hospital.retrieveEmployee(nameOfEmployee);
+		String employeeRecord = hospital.retrieveEmployeeRecord(selectedEmployee);
+		System.out.println(employeeRecord);
 		System.out.println();
 	}
 
@@ -153,7 +224,7 @@ public class HospitalApp {
 			System.out.println("3. Receptionist          ");
 			System.out.println("4. Janitor               ");
 			System.out.println("5. Back to previous menu.");
-			System.out.println("6. Exit the application. ");
+			System.out.println("0. Exit the application ");
 			userResponse = scanner.nextLine().trim().toUpperCase();
 			System.out.println();
 
@@ -204,7 +275,7 @@ public class HospitalApp {
 				System.out.println();
 				Janitor janitor = new Janitor(employeeName);
 				hospital.addEmployeeToHospital(janitor);
-				System.out.println("Receptionist " + janitor.getEmployeeName() + " has been added.");
+				System.out.println("Janitor " + janitor.getEmployeeName() + " has been added.");
 				System.out.println();
 				System.out.println("Is " + janitor.getEmployeeName() + " currently sweeping? [Y/N]");
 				userResponse = scanner.nextLine().trim().toUpperCase();
@@ -216,7 +287,7 @@ public class HospitalApp {
 			case "5":
 				stayInMenu = false;
 				break;
-			case "6":
+			case "0":
 				terminateApplication();
 				break;
 			default:
