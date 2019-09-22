@@ -20,11 +20,11 @@ public class HospitalTest {
 
 	@Test
 	public void hospitalCanHaveEmployees() throws Exception {
-		Hospital underTest = new Hospital();
-		Janitor janitor = new Janitor("Test Janitor");
+		Hospital underTest 	 	  = new Hospital();
+		Janitor janitor 		  = new Janitor("Test Janitor");
 		Receptionist receptionist = new Receptionist("Test Receptionist");
-		Doctor doctor = new Doctor("Test Doctor", "General Practitioner");
-		Nurse nurse = new Nurse("Test Nurse", 10);
+		Doctor doctor 			  = new Doctor("Test Doctor", "General Practitioner");
+		Nurse nurse 			  = new Nurse("Test Nurse", 10);
 		underTest.addEmployeeToHospital(janitor);
 		underTest.addEmployeeToHospital(receptionist);
 		underTest.addEmployeeToHospital(doctor);
@@ -117,4 +117,25 @@ public class HospitalTest {
 		assertEquals(canIPayEmployeeAgain, false);
 	}
 	
+	@Test
+	public void canReduceDirtLevel() {
+		Hospital underTest	  = new Hospital();
+		Janitor  janitor	  = new Janitor("Hulk Hogan");
+		underTest.addEmployeeToHospital(janitor);
+		underTest.sweepUpDirt(); //One sweeping reduces dirt by 7.
+		int expectedDirtiness = underTest.getDirtiness();
+		assertEquals(expectedDirtiness, 4);
+	}
+	
+	@Test
+	public void dirtLevelCannotBeNegative() {
+		Hospital underTest	  = new Hospital();
+		Janitor  janitor	  = new Janitor("Hulk Hogan");
+		underTest.addEmployeeToHospital(janitor);
+		underTest.sweepUpDirt(); //One sweeping reduces dirt by 7.
+		underTest.sweepUpDirt(); //One sweeping reduces dirt by 7.
+		underTest.sweepUpDirt(); //One sweeping reduces dirt by 7.
+		int expectedDirtiness = underTest.getDirtiness();
+		assertEquals(expectedDirtiness, 0);
+	}
 }

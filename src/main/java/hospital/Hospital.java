@@ -2,18 +2,29 @@ package hospital;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class Hospital {
+
 
 	HashMap<Integer, Zombie> zombies;
 	HashMap<String, Employee> employees;
 	HashMap<String, Patient> patients;
+	int dirtiness = 11; //out of 107
+
+	public int getDirtiness() {
+		return dirtiness;
+	}
+
+	public void setDirtiness(int amountOfDirt) {
+		this.dirtiness = amountOfDirt;
+	}
 
 	public Hospital() {
 		employees = new HashMap<>();
 		patients = new HashMap<>();
 		zombies = new HashMap<>();
-		
+
 		Zombie zombie1 = new Zombie(1);
 		Zombie zombie2 = new Zombie(2);
 		Zombie zombie3 = new Zombie(3);
@@ -28,7 +39,7 @@ public class Hospital {
 		this.addZombieToHospital(zombie5);
 		this.addZombieToHospital(zombie6);
 		this.addZombieToHospital(zombie7);
-		
+
 		Doctor doctor1 = new Doctor("Dr. DoLittle", "Toenails");
 		Doctor doctor2 = new Doctor("Dr. Who", "Space-Time");
 		Nurse nurse1 = new Nurse("Wanda Sparks", 10);
@@ -45,14 +56,14 @@ public class Hospital {
 		this.addEmployeeToHospital(receptionist2);
 		this.addEmployeeToHospital(janitor1);
 		this.addEmployeeToHospital(janitor2);
-		
+
 		Patient patient1 = new Patient("Iam Sick");
 		Patient patient2 = new Patient("Help MePlease");
 		Patient patient3 = new Patient("Inna Koma");
 		this.addPatientToHospital(patient1);
 		this.addPatientToHospital(patient2);
 		this.addPatientToHospital(patient3);
-		
+
 	}
 
 	public void addEmployeeToHospital(Employee employeeToAdd) {
@@ -229,4 +240,19 @@ public class Hospital {
 
 		return employeeRecord;
 	}
+
+	public void sweepUpDirt() {
+		boolean thereIsAtLeastOneJanitorOnStaff = false;
+		for (Employee employee : employees.values()) 
+		{
+			if (employee instanceof Janitor)
+				thereIsAtLeastOneJanitorOnStaff = true;
+		}
+		if (thereIsAtLeastOneJanitorOnStaff == true)
+			setDirtiness(dirtiness - 7);
+		if (getDirtiness() < 0)
+			setDirtiness(0);
+	}
+
+
 }

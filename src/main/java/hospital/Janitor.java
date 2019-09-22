@@ -17,8 +17,6 @@ public class Janitor extends Employee {
 		this.isSweeping = isSweeping;
 	}
 
-	public void fightZombies() {
-//		Hospital.zombiesInHospital -= 3;
-	}
+
 
 }
