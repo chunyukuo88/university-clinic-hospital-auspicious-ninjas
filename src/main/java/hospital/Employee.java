@@ -5,13 +5,13 @@ import java.util.Random;
 public abstract class Employee {
 
 	private String employeeName;
-	private int employeeNumber;
+	private String employeeNumber;
 	private int salary;
 	private boolean hasBeenPaid;
 
 	public Employee(String employeeName) {
 		setEmployeeName(employeeName);
-		setEmployeeNumber(this.newValue());
+		setEmployeeNumber();
 		setSalary(0); 
 		setHasBeenPaid(false);
 	}
@@ -41,11 +41,12 @@ public abstract class Employee {
 		this.employeeName = employeeName;
 	}
 
-	public int getEmployeeNumber() {
+	public String getEmployeeNumber() {
 		return employeeNumber;
 	}
 
-	private void setEmployeeNumber(int employeeNumber) {
+	private void setEmployeeNumber() {
+		String employeeNumber = String.valueOf(newValue());
 		this.employeeNumber = employeeNumber;
 	}
 

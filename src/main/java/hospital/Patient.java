@@ -5,13 +5,18 @@ import java.util.Random;
 public class Patient {
 
 	private String patientName = "";
-	private int patientNumber = 0;
+	private String patientNumber = "";
 	private int bloodLevel = 20;
 	private int healthLevel = 10;
 	
 	public Patient(String nameOfPatient) {
 		this.setPatientName(nameOfPatient);
-		this.patientNumber = this.newValue();
+		this.setPatientNumber();
+	}
+
+	private void setPatientNumber() {
+		String patientNumber = String.valueOf(newValue());
+		this.patientNumber = patientNumber;
 	}
 
 	public String getPatientName() {
@@ -38,7 +43,7 @@ public class Patient {
 		this.healthLevel = healthLevel;
 	}
 
-	public Integer getPatientNumber() {
+	public String getPatientNumber() {
 		return patientNumber;
 	}
 	
