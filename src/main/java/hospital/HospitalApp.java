@@ -13,6 +13,8 @@ public class HospitalApp {
 
 		System.out.println("Welcome to the University Clinic Hospital.");
 		System.out.println();
+		displayHospitalAttributes();
+		System.out.println();
 
 		stayInMenu = true;
 		while (stayInMenu) {
@@ -28,6 +30,7 @@ public class HospitalApp {
 		System.out.println("1. Employees Menu");
 		System.out.println("2. Patients Menu");
 		System.out.println("3. View Records");
+		System.out.println("4. Hospital Actions");
 		System.out.println("0. Exit");
 		userResponse = scanner.nextLine();
 		System.out.println();
@@ -42,6 +45,10 @@ public class HospitalApp {
 		case "3":
 			displayEmployeeRecords();
 			displayPatientRecords();
+			displayHospitalAttributes();
+			break;
+		case "4":
+			displayHospitalActionsMenu();
 			break;
 		case "0":
 			terminateApplication();
@@ -49,6 +56,71 @@ public class HospitalApp {
 		default:
 			System.out.println("Response not recognized.");
 		}
+	}
+
+	private static void displayHospitalActionsMenu() {
+		stayInMenu = true;
+		while (stayInMenu) {
+			System.out.println("HOSPITAL ACTIONS MENU");
+			System.out.println("Please enter a number from these options:");
+			System.out.println();
+			System.out.println("1. Pay all employees.");
+			System.out.println("2. Janitors to sweep the hospital.");
+			System.out.println("3. Janitors attack the zombies.");
+			System.out.println("4. View all records.");
+			System.out.println("5. Back to main menu.");
+			System.out.println("0. Exit.");
+
+			userResponse = scanner.nextLine().trim().toUpperCase();
+			System.out.println();
+
+			switch (userResponse) {
+			case "1":
+				submitEmployeePayroll();
+				break;
+			case "2":
+				hospital.sweepUpDirt();
+				displayHospitalAttributes();
+				break;
+			case "3":
+				//WIP: Attack the zombies
+				System.out.println("No attack occurred, the janitors are sleeping.");
+				System.out.println();
+				break;
+			case "4":
+				displayEmployeeRecords();
+				displayPatientRecords();
+				displayHospitalAttributes();
+				break;
+			case "5":
+				stayInMenu = false;
+				break;
+			case "0":
+				terminateApplication();
+				break;
+			default:
+				System.out.println("Response not recognized.");
+			}
+		}
+		stayInMenu = true;
+	}
+
+	private static void displayHospitalAttributes() {
+		System.out.println("University Clinic Hospital:");
+		System.out.print(String.format("|%-15s", "Employee Count"));
+		System.out.print(String.format("|%-15s", "Patient Count"));
+		System.out.print(String.format("|%-15s", "Zombie Count"));
+		System.out.print(String.format("|%-15s|", "Dirt Level"));
+		System.out.println();
+		System.out.println(
+				"|---------------------------------------------------------------|");
+		String record = "";
+		record = (String.format("|%-15s", String.valueOf(hospital.employees.size())))
+				+ (String.format("|%-15s", String.valueOf(hospital.patients.size())))
+				+ (String.format("|%-15s", String.valueOf(hospital.zombies.size())))
+				+ (String.format("|%-15s|", String.valueOf(hospital.getDirtiness()))); 
+		System.out.println(record);
+		System.out.println();
 	}
 
 	private static void displayPatientMenu() {
@@ -97,10 +169,8 @@ public class HospitalApp {
 			System.out.println();
 			System.out.println("1. Add an employee to the hospital.");
 			System.out.println("2. Remove an employee from the hospital.");
-			System.out.println("3. Search for one employee.");
-			System.out.println("4. Pay all employees.");
-			System.out.println("5. View employee records.");
-			System.out.println("6. Back to main menu.");
+			System.out.println("3. View employee records.");
+			System.out.println("4. Back to main menu.");
 			System.out.println("0. Exit.");
 
 			userResponse = scanner.nextLine().trim().toUpperCase();
@@ -114,16 +184,9 @@ public class HospitalApp {
 				removeEmployeeFromTheHospital();
 				break;
 			case "3":
-				searchByEmployeeName();
-				// WIP: Add another sub-menu for employee actions.
-				break;
-			case "4":
-				submitEmployeePayroll();
-				break;
-			case "5":
 				displayEmployeeRecords();
 				break;
-			case "6":
+			case "4":
 				stayInMenu = false;
 				break;
 			case "0":
